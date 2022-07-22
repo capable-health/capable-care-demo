@@ -96,7 +96,6 @@ const AddToDoLink = () => {
   return (
     <>
       <AddToDoModal open={openModal} close={handleCloseModal} />
-      <LinkButton onClick={handleOpenModal}>+ Add To Do</LinkButton>
     </>
   );
 };
