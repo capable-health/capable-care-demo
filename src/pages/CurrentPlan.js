@@ -41,36 +41,7 @@ function CarePlanHeader({ currentPlan }) {
   );
 }
 
-// Renders the Practitioner section.
-function Practitioner() {
-  // eventually pull these from carePlan
-  const practitionerName = "Dr. Lauren Potapova";
-  const practitionerPicture = require("../assets/profile-member-03.png");
-  return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "row",
-        marginTop: "2rem",
-      }}
-    >
-      <Avatar src={practitionerPicture} sx={{ height: 56, width: 56 }} />
 
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "start",
-          marginLeft: "1rem",
-          marginTop: "0.3rem",
-        }}
-      >
-        <Typography variant="eyebrow">Your Practitioner</Typography>
-        <Typography variant="h6">{practitionerName}</Typography>
-      </Box>
-    </Box>
-  );
-}
 
 // Renders the "Last Modified" section.
 function LastModified({ date }) {
@@ -100,7 +71,6 @@ function CurrentPlanWithContent(props) {
       <CarePlanHeader currentPlan={currentPlan} />
 
       <Container sx={{ marginBottom: 5 }}>
-        <Practitioner />
         <RichText
           content={currentPlan.description}
           sx={{
