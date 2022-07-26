@@ -122,6 +122,8 @@ export default function Profile({ signOut }) {
     signOut();
   };
 
+  console.log(process.env.REACT_APP_CAPABLE_DEMO);
+
   return (
     <>
       <BasicModal
@@ -154,6 +156,7 @@ export default function Profile({ signOut }) {
         />
       </Container>
 
+    {process.env.REACT_APP_USAGE_MODE === 'demo' && (
       <Container sx={{ marginTop: 3 }}>
         <Typography variant="h6" component="h2">
           My Information
@@ -207,6 +210,7 @@ export default function Profile({ signOut }) {
           </List>
         </StyledCard>
       </Container>
+    )}
 
       <Container sx={{ marginTop: 3 }}>
         <StyledCard sx={{ paddingY: 0 }}>
