@@ -121,8 +121,77 @@ export default function Profile({ signOut }) {
     navigate("/");
     signOut();
   };
+  const MyInformation = ({ usageMode, surveyId }) => {
+    const components = [];
+    if (surveyId !== "") {
+      components.push(
+        <IconListLink
+          icon={<WellnessIcon />}
+          text="Wellness Profile"
+          onClick={() => navigate("/survey")}
+        />
+      );
+    }
+    if (usageMode === "demo") {
+      components.push(
+        <IconListLink
+          icon={<AllergiesIcon />}
+          text="Allergies"
+          onClick={() =>
+            handleOpenModal("This section may be populated by intake survey")
+          }
+        />
+      );
+      components.push(
+        <IconListLink
+          icon={<MedicationsIcon />}
+          text="Current Medications"
+          onClick={() =>
+            handleOpenModal(
+              "This section may be populated by observations recorded by patient"
+            )
+          }
+        />
+      );
+      components.push(
+        <IconListLink
+          icon={<VitalsIcon />}
+          text="Vitals & Trends"
+          onClick={() =>
+            handleOpenModal(
+              "This section may be populated by observations recorded by patient"
+            )
+          }
+        />
+      );
+      components.push(
+        <IconListLink
+          icon={<PreferencesIcon />}
+          text="Care preferences"
+          onClick={() =>
+            handleOpenModal("This section may launch a questionnaire")
+          }
+        />
+      );
+    }
+    if (components.length !== 0) {
+      return (
+        <Container sx={{ marginTop: 3 }}>
+          <Typography variant="h6" component="h2">
+            My Information
+          </Typography>
 
-  console.log(process.env.REACT_APP_CAPABLE_DEMO);
+          <StyledCard sx={{ paddingY: 0 }}>
+            <List>
+              {components.reduce((prev, curr) => [prev, <Divider />, curr])}
+            </List>
+          </StyledCard>
+        </Container>
+      );
+    } else {
+      return null;
+    }
+  };
 
   return (
     <>
@@ -156,61 +225,10 @@ export default function Profile({ signOut }) {
         />
       </Container>
 
-    {process.env.REACT_APP_USAGE_MODE === 'demo' && (
-      <Container sx={{ marginTop: 3 }}>
-        <Typography variant="h6" component="h2">
-          My Information
-        </Typography>
-
-        <StyledCard sx={{ paddingY: 0 }}>
-          <List>
-            <IconListLink
-              icon={<WellnessIcon />}
-              text="Wellness Profile"
-              onClick={() => navigate("/survey")}
-            />
-            <Divider />
-            <IconListLink
-              icon={<AllergiesIcon />}
-              text="Allergies"
-              onClick={() =>
-                handleOpenModal(
-                  "This section may be populated by intake survey"
-                )
-              }
-            />
-            <Divider />
-            <IconListLink
-              icon={<MedicationsIcon />}
-              text="Current Medications"
-              onClick={() =>
-                handleOpenModal(
-                  "This section may be populated by observations recorded by patient"
-                )
-              }
-            />
-            <Divider />
-            <IconListLink
-              icon={<VitalsIcon />}
-              text="Vitals & Trends"
-              onClick={() =>
-                handleOpenModal(
-                  "This section may be populated by observations recorded by patient"
-                )
-              }
-            />
-            <Divider />
-            <IconListLink
-              icon={<PreferencesIcon />}
-              text="Care preferences"
-              onClick={() =>
-                handleOpenModal("This section may launch a questionnaire")
-              }
-            />
-          </List>
-        </StyledCard>
-      </Container>
-    )}
+      <MyInformation
+        usageMode={process.env.REACT_APP_USAGE_MODE}
+        surveyId={process.env.REACT_APP_WELLNESS_SURVEY_ID}
+      />
 
       <Container sx={{ marginTop: 3 }}>
         <StyledCard sx={{ paddingY: 0 }}>
